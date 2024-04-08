@@ -1,0 +1,22 @@
+{
+  "name": "fullstackapp",
+  "version": "1.0.0",
+  "description": "\"# FullStackApp\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saikrishnaKrish/FullStackApp.git"
+  },
+  "author": "sai krishna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saikrishnaKrish/FullStackApp/issues"
+  },
+  "homepage": "https://github.com/saikrishnaKrish/FullStackApp#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
