@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/saikrishnaKrish/FullStackApp#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "uuid4": "^2.0.3"
   }
 }
