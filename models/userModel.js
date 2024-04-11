@@ -1,11 +1,51 @@
-const mongoose= require("mongoose");
+const mongoose = require("mongoose");
+/**
+ *  require vs import
+ *  import is ES6 module
+ *  require is commonjs module
+ *  import is done at compilation time
+ *  require is done at run time
+ * 
+ */
+
+
 const userSchema=new mongoose.Schema({
-    name:String,
-    email:String,
-    password:String,
-    confirmPwd:String
+        name:{
+            type:String,
+            requried:true
+        },
+        email:{
+            type:String,
+            required:true
+        },
+        phone:{
+            type:Number,
+            required:true,
+            unique:true,
+            minlength:10
+        },
+        password:{
+            type:String,
+            required:true,
+            minlength:8
+        },
+        confirmPassword:{
+            type:String,
+            required:true,
+            minlength:8,
+            validate:{
+                validator:function() {
+                      return this.password===this.confirmPassword;
+                },
+                message:"password  and confirm password should be same"
+            }
+        }
 })
 
-const userModel= mongoose.model("user",userSchema);
 
-module.exports= userModel;
+
+
+
+
+const userModel= mongoose.model("user",userSchema);
+module.exports=userModel;

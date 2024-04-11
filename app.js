@@ -6,7 +6,6 @@ const PORT=process.env.PORT;
 const DB_URL=process.env.CONNECTION_STRING;
 
 
-
 app.use(express.json())
 
 
@@ -25,13 +24,20 @@ const userModel= require("./models/userModel")
 
 //controllers
 const  createUserHandler= async (req,res)=>{
-    const data=req.body;
-    console.log(data)
-    const userDetails=await userModel.create(data)
-    res.status(200).json({
-        message:"successfully user got created!",
-        data:userDetails
-    })
+    try{
+        const data=req.body;
+        console.log(data)
+        const userDetails=await userModel.create(data)
+        res.status(200).json({
+            message:"successfully user got created!",
+            data:userDetails
+        })
+    }
+    catch(err){
+        console.log("error occurred",err)
+        res.status(500).send("unable to create user!")
+    }
+  
 }
 
 

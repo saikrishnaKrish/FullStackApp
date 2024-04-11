@@ -1,5 +1,5 @@
 // Import required modules
-//--handling api request
+//--handling api request and storing data into file
 
 const uuid=require("uuid4")
 const items= require('./data1.json')
