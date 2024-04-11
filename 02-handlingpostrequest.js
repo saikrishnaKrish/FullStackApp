@@ -1,3 +1,7 @@
+//connected to Mongodb
+//handling post request
+
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -7,10 +11,9 @@ const DB_URL=process.env.CONNECTION_STRING;
 
 
 
+
 app.use(express.json())
 
-
-//connectionString for mongodb
 mongoose.connect(DB_URL)
 .then((connection)=>{
     console.log("connected to DB")
@@ -18,25 +21,26 @@ mongoose.connect(DB_URL)
 .catch((err)=>{
     console.log("unable to connect",err)
 })
+const userSchema= new mongoose.Schema({
+    name:String,
+    email:String,
+    password:String,
+    confirmPwd:String
+})
 
-//models
-const userModel= require("./models/userModel")
+const User= mongoose.model("User",userSchema);
 
-
-//controllers
-const  createUserHandler= async (req,res)=>{
+app.post("/createUser",async (req,res)=>{
     const data=req.body;
     console.log(data)
-    const userDetails=await userModel.create(data)
+    const userDetails=await User.create(data)
     res.status(200).json({
         message:"successfully user got created!",
         data:userDetails
     })
-}
 
-
-//Routes
-app.post("/createUser",createUserHandler)
+    
+})
 
 
 
