@@ -34,17 +34,46 @@ const  createUserHandler= async (req,res)=>{
         })
     }
     catch(err){
-        console.log("error occurred",err)
-        res.status(500).send("unable to create user!")
+        // console.log("error occurred",err)
+        res.status(500).json({
+            message:"unable to create user!",
+            data:err.message
+        })
     }
   
 }
 
 
+const getAllUsersHandler=async(req,res)=>{
+    try{
+     const usersList = await userModel.find();
+        if(usersList.length==0){
+            res.status(200).send("No users available!!!")
+        }
+        res.status(200).send({
+            data:usersList
+        })
+    }catch(err){
+        res.status(500).send("unable to fetch the users list")
+    }
+    
+}
+const checkInput = async(req,res)=>{
+    const keys = Object.keys(req.body);
+
+    if(keys.length==0){
+        res.status(400).send("user fields can't be empty")
+    }else{
+        next()
+    }
+}
+
+
 //Routes
-app.post("/createUser",createUserHandler)
 
+app.post("/createUser",checkInput,createUserHandler)
 
+app.get("/getAllUsers",getAllUsersHandler)
 
 
 app.get('/',()=>console.log("request recieved!!!"))

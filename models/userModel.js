@@ -10,20 +10,27 @@ const mongoose = require("mongoose");
 
 
 const userSchema=new mongoose.Schema({
-        name:{
-            type:String,
-            requried:true
-        },
-        email:{
-            type:String,
-            required:true
-        },
-        phone:{
-            type:Number,
-            required:true,
-            unique:true,
-            minlength:10
-        },
+        name: {
+            type: String,
+            required: true,
+          },
+          email: {
+            type: String,
+            required: true,
+            unique: true,
+          },
+          phone: {
+            type: Number,
+            required: true,
+            unique: true,
+            minlength: 10,
+            validate:{
+                validator:function(){
+                    return this.phone.length<10
+                },
+                message:"phone number should have min length 10 chars"
+            }
+          },
         password:{
             type:String,
             required:true,
