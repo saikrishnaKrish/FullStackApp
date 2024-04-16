@@ -1,5 +1,5 @@
 const express = require('express');
-const {checkInput,createUserHandler,getAllUsersHandler} =require('./controller/userController')
+const {checkInput,createUserHandler,getAllUsersHandler, getUserHandler} =require('./controller/userController')
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -21,8 +21,9 @@ mongoose.connect(DB_URL)
 
 //Routes
 app.post("/createUser",checkInput,createUserHandler)
-
 app.get("/getAllUsers",getAllUsersHandler)
+app.post("/getuserdetails/:id",getUserHandler)
+
 
 app.get('/',(req,res)=>
 res.status(200).send("Hi Dude!!!")

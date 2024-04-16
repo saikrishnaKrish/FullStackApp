@@ -50,9 +50,37 @@ const getAllUsersHandler=async(req,res)=>{
     
 }
 
+const getUserHandler = async(req,res)=>{
+    try{
+        const {id}=req.params;
+        console.log("userId",id)
+        const userDetails= await userModel.findById(id);
+        if(!userDetails){
+            // console.warn("error not occured userDetails",userDetails)
+
+            res.status(200).send({
+                message:"user details not available"
+            })
+        }else{
+            res.status(200).send({
+                status:"success",
+                data:userDetails
+            })
+        }
+            
+    
+    }
+    catch(err){
+        res.status(400).send({
+            message:"error occurred while fetching the data!!!"
+        })
+    }
+}
+
 
 module.exports={
     checkInput,
     createUserHandler,
-    getAllUsersHandler
+    getAllUsersHandler,
+    getUserHandler
 }
