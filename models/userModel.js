@@ -12,12 +12,12 @@ const mongoose = require("mongoose");
 const userSchema=new mongoose.Schema({
         name: {
             type: String,
-            required: true,
+            required: [true,"name is required"],
           },
           email: {
             type: String,
             required: true,
-            unique: true,
+            unique: [true,"email must be unique"],
           },
           phone: {
             type: Number,
@@ -25,8 +25,8 @@ const userSchema=new mongoose.Schema({
             unique: true,
             minlength: 10,
             validate:{
-                validator:function(){
-                    return this.phone.length<10
+                validator:function(v){
+                    return v.toString().length==10
                 },
                 message:"phone number should have min length 10 chars"
             }
@@ -50,6 +50,19 @@ const userSchema=new mongoose.Schema({
 })
 
 
+
+// userSchema.pre("save", async (next)=>{
+//   try{
+//     const isEmailExists = await userModel.findOne({ email: this.email });
+//     if(isEmailExists){
+//       throw new Error("Email already Exists!!!");
+//     } 
+//     next();
+//     }
+//   catch(err){
+//     next(err)
+//   }
+// })
 
 
 
