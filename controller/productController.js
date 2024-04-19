@@ -109,4 +109,5 @@ module.exports = {
   getProductsByIdHandler,
   deleteProductsByIdHandler,
   updateProductsByIdHandler,
+  checkInput
 };
