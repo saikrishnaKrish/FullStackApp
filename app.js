@@ -2,8 +2,10 @@ const express = require("express");
 const {
   checkInput,
   createUserHandler,
-  getAllUsersHandler,
   getUserHandler,
+  getUserByIdHandlder,
+  updateUserByIdHandler,
+  deleteUserByIdHandler
 } = require("./controller/userController");
 const app = express();
 const mongoose = require("mongoose");
@@ -33,10 +35,11 @@ mongoose
 //Routes
 //user Routes
 app.post("/createUser", checkInput, createUserHandler);
-app.get("/getAllUsers", getAllUsersHandler);
-app.post("/getuserdetails/:id", getUserHandler);
-
-//product Routes
+app.get("/getAllUsers", getUserHandler);
+app.get("/getuserdetails/:id", getUserByIdHandlder);
+app.patch("/updateUser/:id",updateUserByIdHandler);
+app.delete("/deleteuser/:id",deleteUserByIdHandler);
+// //product Routes
 app.get("/products", getAllProductsHandler);
 app.get("/products/:id", getProductsByIdHandler);
 app.post("/addproduct", createProductHandler);

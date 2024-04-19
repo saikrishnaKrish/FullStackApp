@@ -1,7 +1,7 @@
 const checkInput = (req,res,next)=>{
     const details=req.body;
     const isEmpty=Object.keys(details);
-    if(!isEmpty){
+    if(isEmpty.length==0){        
         res.status(400).json({
             message:"error",
             data:"Input fields cannot be empty"
@@ -54,7 +54,7 @@ const createFactory=(elementModel)=>async(req,res)=>{
 const getElementByIdFactory=(elementModel)=>async(req,res)=>{
     try{
         const {id}=req.params;
-        const data=elementModel.findById(id);
+        const data=await elementModel.findById(id);
         if(!data){
             res.status(404).json({
                 message:"error",
@@ -73,13 +73,14 @@ const getElementByIdFactory=(elementModel)=>async(req,res)=>{
             data:err.message
         })
     }
+   
 }
 
-const updateElementByIdFactory=async(elementModel)=>async(req,res)=>{
+const updateElementByIdFactory=(elementModel)=>async(req,res)=>{
 try{
     const {id}= req.params;
     const details = req.body;
-    const updatedData = await elementModel.findByIdandUpdate(id,{$set:details,$inc:{__v:1}},{new:true});
+    const updatedData = await elementModel.findByIdAndUpdate(id,{$set:details,$inc:{__v:1}},{new:true});
     if(!updatedData){
         throw new Error("user not found!")
     }else{
@@ -97,7 +98,7 @@ catch(err){
 }
 }
 
-const deleteElementByIdHandler= async (elementModel)=>{
+const deleteElementByIdHandler= (elementModel)=>async(req,res)=>{
   try{
     const {id}=req.params;
     const deletedData=await elementModel.findByIdAndDelete(id);
