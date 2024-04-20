@@ -39,27 +39,44 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 8,
-    validate: {
-      validator: function () {
-        return this.password === this.confirmPassword;
-      },
-      message: "password  and confirm password should be same",
-    },
+    // validate: {
+    //   validator: function () {
+    //     return this.password === this.confirmPassword;
+    //   },
+    //   message: "password  and confirm password should be same",
+    // },
   },
+  role:{
+    type:String,
+    default:"user"
+  }
 });
 
-// userSchema.pre("save", async (next)=>{
-//   try{
-//     const isEmailExists = await userModel.findOne({ email: this.email });
-//     if(isEmailExists){
-//       throw new Error("Email already Exists!!!");
-//     }
-//     next();
-//     }
-//   catch(err){
-//     next(err)
-//   }
-// })
+
+
+const validRoles=["admin","user","sales"]
+
+userSchema.pre("save",async function(next){
+
+  if(this.password!=this.confirmPassword){
+    next(new Error("Password and confirm Password should be same"));
+  } 
+  this.confirmPassword=undefined;
+
+  if(this.role){
+    const isValid = validRoles.inclues(this.role);
+        if(!isValid){
+          throw new Error(`Invalid role,${this.role}`);
+        }else{
+          next()
+        }
+  }else{
+    this.role="user"
+    console.log("role assigned")
+  }
+
+  next()
+})
 
 const userModel = mongoose.model("user", userSchema);
 module.exports = userModel;

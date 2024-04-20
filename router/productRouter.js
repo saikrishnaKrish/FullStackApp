@@ -6,12 +6,13 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controller/productController");
+const { checkInput } = require("../utils/CRUDfacotry");
 
 const productRouter = express.Router();
 
 productRouter.get("/", getAllProducts);
 productRouter.get("/:id", getProductsById);
-productRouter.post("/", createProducts);
+productRouter.post("/", checkInput,createProducts);
 productRouter.patch("/:id", updateProduct);
 productRouter.delete("/:id", deleteProduct);
 

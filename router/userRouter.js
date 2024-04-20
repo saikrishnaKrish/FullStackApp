@@ -5,13 +5,14 @@ const {
   createUserHandler,
   deleteUserByIdHandler,
   updateUserByIdHandler,
+  checkInput,
 } = require("../controller/userController");
 
 const userRouter = express.Router();
 
 userRouter.get("/", getUserHandler);
 userRouter.get("/:id", getUserByIdHandler);
-userRouter.post("/", createUserHandler);
+userRouter.post("/", checkInput,createUserHandler);
 userRouter.patch("/:id", updateUserByIdHandler);
 userRouter.delete("/:id", deleteUserByIdHandler);
 

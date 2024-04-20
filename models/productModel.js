@@ -16,13 +16,12 @@ const productSchema = new mongoose.Schema({
       message: "price must be greater than zero",
     },
   },
-  category: {
-    type: String,
-    unique: true,
+  categories: {
+    type: [String],
     required: [true, "A product category is required"],
   },
   images: {
-    type: String,
+    type: [String],
   },
   description: {
     type: String,
@@ -38,6 +37,17 @@ const productSchema = new mongoose.Schema({
     },
   },
 });
+
+const validCategoires=["electronics","Stationary","furniture","clothing"]
+productSchema.pre("save",function(next){
+  const inValidCategories =this.categories.filter((category)=>!validCategoires.includes(category.toLocaleLowerCase()))
+  if(inValidCategories.length>0){
+    throw new Error(`"Invalid categories ",${inValidCategories.join(",")}`)
+   }
+   else{
+    next()
+   }
+})
 
 const productModel = mongoose.model("product", productSchema);
 
