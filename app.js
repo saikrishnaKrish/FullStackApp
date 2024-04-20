@@ -1,21 +1,23 @@
 const express = require("express");
-const {
-  checkInput,
-  createUserHandler,
-  getUserHandler,
-  getUserByIdHandlder,
-  updateUserByIdHandler,
-  deleteUserByIdHandler
-} = require("./controller/userController");
+// const {
+//   checkInput,
+//   createUserHandler,
+//   getUserHandler,
+//   getUserByIdHandlder,
+//   updateUserByIdHandler,
+//   deleteUserByIdHandler
+// } = require("./controller/userController");
 const app = express();
 const mongoose = require("mongoose");
-const {
-  getAllProductsHandler,
-  createProductHandler,
-  deleteProductsByIdHandler,
-  updateProductsByIdHandler,
-  getProductsByIdHandler,
-} = require("./controller/productController");
+// const {
+//   getAllProductsHandler,
+//   createProductHandler,
+//   deleteProductsByIdHandler,
+//   updateProductsByIdHandler,
+//   getProductsByIdHandler,
+// } = require("./controller/productController");
+const userRouter = require("./router/userRouter");
+const productRouter = require("./router/productRouter");
 require("dotenv").config();
 const PORT = process.env.PORT;
 const DB_URL = process.env.CONNECTION_STRING;
@@ -34,17 +36,22 @@ mongoose
 
 //Routes
 //user Routes
-app.post("/createUser", checkInput, createUserHandler);
-app.get("/getAllUsers", getUserHandler);
-app.get("/getuserdetails/:id", getUserByIdHandlder);
-app.patch("/updateUser/:id",updateUserByIdHandler);
-app.delete("/deleteuser/:id",deleteUserByIdHandler);
+// app.post("/createUser", checkInput, createUserHandler);
+// app.get("/getAllUsers", getUserHandler);
+// app.get("/getuserdetails/:id", getUserByIdHandlder);
+// app.patch("/updateUser/:id",updateUserByIdHandler);
+// app.delete("/deleteuser/:id",deleteUserByIdHandler);
+
+app.use("/api/users",userRouter)
+
+
 // //product Routes
-app.get("/products", getAllProductsHandler);
-app.get("/products/:id", getProductsByIdHandler);
-app.post("/addproduct", createProductHandler);
-app.delete("/products/:id", deleteProductsByIdHandler);
-app.patch("/products/:id", updateProductsByIdHandler);
+// app.get("/products", getAllProductsHandler);
+// app.get("/products/:id", getProductsByIdHandler);
+// app.post("/addproduct", createProductHandler);
+// app.delete("/products/:id", deleteProductsByIdHandler);
+// app.patch("/products/:id", updateProductsByIdHandler);
+app.use("/api/products",productRouter)
 
 app.get("/", (req, res) => res.status(200).send("Hi Dude!!!"));
 

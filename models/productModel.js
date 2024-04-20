@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
+    unique: true,
     required: [true, "A product must have a price"],
     validate: {
       validator: (v) => {
@@ -15,13 +16,13 @@ const productSchema = new mongoose.Schema({
       message: "price must be greater than zero",
     },
   },
-  catergory: {
+  category: {
     type: String,
     unique: true,
-    required: [true, "A product must have a category"],
+    required: [true, "A product category is required"],
   },
   images: {
-    type: "String",
+    type: String,
   },
   description: {
     type: String,
