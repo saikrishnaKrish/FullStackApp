@@ -59,20 +59,17 @@ const validRoles=["admin","user","sales"]
 userSchema.pre("save",async function(next){
 
   if(this.password!=this.confirmPassword){
-    next(new Error("Password and confirm Password should be same"));
+   return next(new Error("Password and confirm Password should be same"));
   } 
   this.confirmPassword=undefined;
 
   if(this.role){
-    const isValid = validRoles.inclues(this.role);
+    const isValid = validRoles.includes(this.role);
         if(!isValid){
-          throw new Error(`Invalid role,${this.role}`);
-        }else{
-          next()
+        return next(new Error(`Invalid role,${this.role}`));
         }
   }else{
     this.role="user"
-    console.log("role assigned")
   }
 
   next()
