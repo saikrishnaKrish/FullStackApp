@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   },
   confirmPassword: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 8,
     // validate: {
     //   validator: function () {
@@ -49,7 +49,9 @@ const userSchema = new mongoose.Schema({
   role:{
     type:String,
     default:"user"
-  }
+  },
+  token:String,
+  otpExpiry:Date
 });
 
 
@@ -58,9 +60,9 @@ const validRoles=["admin","user","sales"]
 
 userSchema.pre("save",async function(next){
 
-  if(this.password!=this.confirmPassword){
-   return next(new Error("Password and confirm Password should be same"));
-  } 
+  // if(this.password!=this.confirmPassword){
+  //  return next(new Error("Password and confirm Password should be same"));
+  // } 
   this.confirmPassword=undefined;
 
   if(this.role){
