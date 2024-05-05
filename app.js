@@ -17,6 +17,7 @@ const mongoose = require("mongoose");
 //   getProductsByIdHandler,
 // } = require("./controller/productController");
 const userRouter = require("./router/userRouter");
+const cookieParser = require("cookie-parser");
 const productRouter = require("./router/productRouter");
 const authRouter = require("./router/authRouter");
 const { protectedRoute } = require("./controller/authController");
@@ -25,7 +26,7 @@ const PORT = process.env.PORT;
 const DB_URL = process.env.CONNECTION_STRING;
 
 app.use(express.json());
-
+app.use(cookieParser());
 //connectionString for mongodb
 mongoose
   .connect(DB_URL)
@@ -44,10 +45,9 @@ mongoose
 // app.patch("/updateUser/:id",updateUserByIdHandler);
 // app.delete("/deleteuser/:id",deleteUserByIdHandler);
 
-app.use("/api/auth",authRouter)
+app.use("/api/auth", authRouter);
 
-app.use("/api/users",userRouter)
-
+app.use("/api/users", protectedRoute, userRouter);
 
 // //product Routes
 // app.get("/products", getAllProductsHandler);
@@ -55,8 +55,7 @@ app.use("/api/users",userRouter)
 // app.post("/addproduct", createProductHandler);
 // app.delete("/products/:id", deleteProductsByIdHandler);
 // app.patch("/products/:id", updateProductsByIdHandler);
-app.use("/api/products",productRouter)
-
+app.use("/api/products", productRouter);
 
 app.get("/", (req, res) => res.status(200).send("Hi Dude!!!"));
 
