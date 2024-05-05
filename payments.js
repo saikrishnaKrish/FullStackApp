@@ -46,14 +46,31 @@ app.post("/checkout", async (req, res) => {
 
 app.post("/verify",(req,res)=>{
       console.log("webhook called")
-      return res.status(200).send("suckcess")
+      // return res.status(200).send("suckcess")  
       try{
+          // getting the details back from our font-end
+        console.log("req details",req.headers)
+        const shasum = crypto.createHmac("sha256", process.env.WEBHOOK_SECRET);
+        shasum.update(JSON.stringify(req.body));
+        const freshSignature = shasum.digest("hex");
+        console.log("server based signature", freshSignature);
+        console.log("reh headers", req.headers);
+        if (freshSignature === req.headers["x-razorpay-signature"]) {
+          
+                  // THE PAYMENT IS LEGIT & VERIFIED
+                  // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
+          console.log("request is legit");
+          res.json({ status: "ok" });
+        } else {
+          res.status(401).json({ status: "invalid request" });
+        }
+      } catch (err) {
+        console.log(err);
+      }
 
-         
-      }
-      catch(err){
-          console.log(err);
-      }
+
+
+      
 })
 
 app.listen(5000, () => console.log(`Port is running at 5000`));

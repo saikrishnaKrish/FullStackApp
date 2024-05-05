@@ -40,32 +40,15 @@ function App() {
       currency: currency,
       name: "Acme Corp",
       description: "Test Transaction",
-      image: "",
-      order_id: id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: "http://localhost:5000/verify",
-      // notes: {
-      //   address: "Razorpay Corporate Office",
-      // },
+      image: "https://th.bing.com/th/id/OIP.Y832vt01HvoSBcbOCQnAigHaEh?rs=1&pid=ImgDetMain",
+      order_id: id, 
       handler:async function(response){
-      //   alert(response.razorpay_payment_id);
-      //   alert(response.razorpay_order_id);
-      //   alert(response.razorpay_signature)
-      const data ={
-        orderCreationId: id,
-        razorpayPaymentId:response.razorpay_payment_id,
-        razorpayOrderId:response.razorpay_order_id,
-        razorpaySignature:response.razorpay_signature,
-      }
-      
-      const result = await fetch("http://localhost:5000/verify", {
-        method: "POST",
-        body: JSON.stringify(data), // Assuming 'data' is the payload you want to send
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    
-    console.log(result);
+        console.log(response.razorpay_payment_id);
+        console.log(response.razorpay_order_id);
+        console.log(response.razorpay_signature)
+          alert("signature verified successfully!!!"
+
+    )
       },
       
       theme: {
