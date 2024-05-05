@@ -24,9 +24,11 @@ const { protectedRoute } = require("./controller/authController");
 require("dotenv").config();
 const PORT = process.env.PORT;
 const DB_URL = process.env.CONNECTION_STRING;
-
+const cors = require('cors');
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors())
+
 //connectionString for mongodb
 mongoose
   .connect(DB_URL)
