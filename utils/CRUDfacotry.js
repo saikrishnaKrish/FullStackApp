@@ -12,6 +12,7 @@ const checkInput = (req, res, next) => {
 };
 
 const getAllFactory = (elementModel) => async (req, res) => {
+  console.log("req",req.cookies)
   try {
     const data = await elementModel.find();
     if (data.length == 0) {

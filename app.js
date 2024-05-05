@@ -18,6 +18,8 @@ const mongoose = require("mongoose");
 // } = require("./controller/productController");
 const userRouter = require("./router/userRouter");
 const productRouter = require("./router/productRouter");
+const authRouter = require("./router/authRouter");
+const { protectedRoute } = require("./controller/authController");
 require("dotenv").config();
 const PORT = process.env.PORT;
 const DB_URL = process.env.CONNECTION_STRING;
@@ -42,6 +44,8 @@ mongoose
 // app.patch("/updateUser/:id",updateUserByIdHandler);
 // app.delete("/deleteuser/:id",deleteUserByIdHandler);
 
+app.use("/api/auth",authRouter)
+
 app.use("/api/users",userRouter)
 
 
@@ -52,6 +56,7 @@ app.use("/api/users",userRouter)
 // app.delete("/products/:id", deleteProductsByIdHandler);
 // app.patch("/products/:id", updateProductsByIdHandler);
 app.use("/api/products",productRouter)
+
 
 app.get("/", (req, res) => res.status(200).send("Hi Dude!!!"));
 

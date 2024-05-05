@@ -6,8 +6,7 @@ const {
   deleteUserByIdHandler,
   updateUserByIdHandler,
   checkInput,
-  forgotPassword,
-  resetPassword,
+ 
 } = require("../controller/userController");
 
 const userRouter = express.Router();
@@ -19,7 +18,5 @@ userRouter.get("/:id", getUserByIdHandler);
 userRouter.post("/", checkInput,createUserHandler);
 userRouter.patch("/:id", updateUserByIdHandler);
 userRouter.delete("/:id", deleteUserByIdHandler);
-userRouter.post("/forgotPassword",forgotPassword);
-userRouter.patch("/resetPassword/:userId",resetPassword);
 
 module.exports = userRouter;
