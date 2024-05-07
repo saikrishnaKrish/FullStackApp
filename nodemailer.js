@@ -213,7 +213,7 @@ const HTML_TEMPLATE = (text) => {
   const options = {
     from:'saikrishna.kanteti@gmail.com',
     to:'saikrishna.kanteti@gmail.com',
-    subject:'Hi Aysush sir, Thankful to your classes am learning nodejs by watching your lectures those are really good and awesome. Thank you very much :-) ',
+    subject: ' Welcome to SK Enterprises!!! :-) ',
     text:message,
     html:HTML_TEMPLATE(message)
   }
