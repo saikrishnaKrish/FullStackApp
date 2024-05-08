@@ -4,7 +4,7 @@ import { addToCart, deleteFromCart } from "./Store/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Product = ({ product, handleAddProduct, handleDeleteProduct, cartQuantity }) => {
-    console.log("product",product)
+
   return (
     <div key={product?._id} className="product">
       <Link to={`/product/${product?._id}`}>
@@ -29,7 +29,7 @@ const ProductList = ({ productList }) => {
   const { cartProducts } = useSelector(store => store.cartReducer);
 
   const handleAddProduct = (product) => {
-    console.log("dispatched product",product)
+ 
     dispatch(addToCart(product));
   };
 
