@@ -72,6 +72,12 @@ async function getBigBillionDayProducts(req,res,next){
   next();
 }
 
+const getProductCategories = async (req,res)=>{
+  res.json({
+    message:"success",
+    data:["electronics","men's clothing","women's clothing","jewelery"]
+  })
+}
 module.exports = {
   getAllFactory,
   getProductsById,
@@ -79,5 +85,6 @@ module.exports = {
   deleteProduct,
   updateProduct,
   getAllProducts,
-  getBigBillionDayProducts
+  getBigBillionDayProducts,
+  getProductCategories
 };

@@ -25,6 +25,9 @@ require("dotenv").config();
 const PORT = process.env.PORT;
 const DB_URL = process.env.CONNECTION_STRING;
 const cors = require('cors');
+const bookingRouter = require("./router/bookingRouter");
+const { createReview } = require("./router/reviewRouter");
+const reviewRouter = require("./router/reviewRouter");
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors())
@@ -58,7 +61,8 @@ app.use("/api/users", protectedRoute, userRouter);
 // app.delete("/products/:id", deleteProductsByIdHandler);
 // app.patch("/products/:id", updateProductsByIdHandler);
 app.use("/api/products", productRouter);
-
+app.use("/api/bookings",bookingRouter);
+app.use("/api/reviews",reviewRouter);
 app.get("/", (req, res) => res.status(200).send("Hi Dude!!!"));
 
 app.listen(PORT, () => console.log("server is running", PORT));

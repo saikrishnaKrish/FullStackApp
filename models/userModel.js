@@ -51,7 +51,15 @@ const userSchema = new mongoose.Schema({
     default:"user"
   },
   token:String,
-  otpExpiry:Date
+  otpExpiry:Date,
+  role:{
+    type:String,
+    default:"user"
+  },
+  bookings:{
+    type:[mongoose.Schema.ObjectId],
+    ref:"booking"
+  }
 });
 
 

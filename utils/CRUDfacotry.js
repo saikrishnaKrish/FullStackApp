@@ -18,13 +18,13 @@ const getAllFactory = (elementModel) => async (req, res) => {
     if (data.length == 0) {
       throw new Error("No data found!!!");
     } else {
-      res.status(200).json({
+    return  res.status(200).json({
         message: "success",
         data: data,
       });
     }
   } catch (err) {
-    res.status(500).json({
+   return  res.status(500).json({
       message: "error",
       data: err.message,
     });

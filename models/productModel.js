@@ -36,6 +36,24 @@ const productSchema = new mongoose.Schema({
       message: "discount must less than the price",
     },
   },
+  stock:{
+    type:Number,
+    required:[true,'A product must have a stock']
+  },
+  brand:{
+    type:String,
+    required:[true,"A product must have a brand"]
+  },
+  reviews:{
+    type:[mongoose.Schema.ObjectId],
+    ref:"review"
+  },
+  averageRating:{
+    type:Number,
+    default:0,
+    min:0,
+    max:5
+  }
 });
 
 const validCategoires=["electronics","Stationary","furniture","clothing"]

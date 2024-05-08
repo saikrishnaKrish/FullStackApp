@@ -202,14 +202,19 @@ const isAdmin = async (req, res, next) => {
   // authorise user to see the user data
   // get user from database
   // if user.role === "admin" then call next
-  const userId=req.userId;
-  const userDetails = await userModel.findOne({_id:userId});
-  if (userDetails.role == "admin") {
-    next();
-  } else {
+  try {
+    const userId = req.userId;
+    if (!userId) {
+      throw new Error("Please login !!!");
+    }
+    const userDetails = await userModel.findOne({ _id: userId });
+    if (userDetails.role == "admin") {
+      next();
+    }
+  } catch (err) {
     return res.status(404).json({
       status: "failure",
-      message: "only admins can perform this action",
+      message: err.message,
     });
   }
 };
@@ -221,9 +226,9 @@ const isAuthorized = (allowedRoles) => {
   // if user's roles fall in the allowedRoles then call next
   return async function (req, res, next) {
     const userId = req.userId;
-    console.log(userId)
-    const userDetails = await userModel.findOne({_id:userId});
-    console.log(userDetails)
+    console.log(userId);
+    const userDetails = await userModel.findOne({ _id: userId });
+    console.log(userDetails);
     if (allowedRoles.includes(userDetails.role)) {
       next();
     } else {
