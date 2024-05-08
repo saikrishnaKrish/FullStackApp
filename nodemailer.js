@@ -95,6 +95,7 @@ const HTML_TEMPLATE = (text) => {
   // 4. sending email
   // sendEmail(options, (info)=>{
   //   console.log("email sent successfully")
+  //   console.log("info",info)
   //   console.log("message id:",info.messageId)
   // })
 
