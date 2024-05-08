@@ -14,9 +14,9 @@ const productRouter = express.Router();
 
 productRouter.get("/", getAllProducts);
 productRouter.get("/bigBillionDay",getBigBillionDayProducts, getAllProducts);
+productRouter.get("/categories",getProductCategories);
 productRouter.post("/", checkInput,createProducts);
 productRouter.get("/:id", getProductsById);
 productRouter.patch("/:id", updateProduct);
 productRouter.delete("/:id", deleteProduct);
-productRouter.get('/categories',getProductCategories);
 module.exports = productRouter;

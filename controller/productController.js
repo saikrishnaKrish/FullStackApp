@@ -40,7 +40,7 @@ const getAllProducts =async (req, res) => {
       // console.log("filter",filter);
       const filterObj = JSON.parse(filter);
       // console.log("filterObj",filterObj);
-      const filterObjStr  = JSON.stringify(filterObj).replace( 
+      const filterObjStr  = stringify(filterObj).replace( 
         // loop over the keys in the object and replace the key with $key
         /\b(gt|gte|lt|lte)\b/g,
       (match)=>`$${match}`);
@@ -73,9 +73,10 @@ async function getBigBillionDayProducts(req,res,next){
 }
 
 const getProductCategories = async (req,res)=>{
+
   res.json({
     message:"success",
-    data:["electronics","men's clothing","women's clothing","jewelery"]
+    data:["electronics","men's clothing","women's clothing","Jewelry"]
   })
 }
 module.exports = {

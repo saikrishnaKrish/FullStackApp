@@ -48,6 +48,9 @@ const productSchema = new mongoose.Schema({
     type:[mongoose.Schema.ObjectId],
     ref:"review"
   },
+  title:String,
+  image:String,
+  category:String,
   averageRating:{
     type:Number,
     default:0,

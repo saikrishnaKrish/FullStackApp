@@ -1,38 +1,33 @@
+  // const {
+  //   checkInput,
+  //   createUserHandler,
+  //   getUserHandler,
+  //   getUserByIdHandlder,
+  //   updateUserByIdHandler,
+  //   deleteUserByIdHandler
+  // } = require("./controller/userController");
+  // const {
+    //   getAllProductsHandler,
+    //   createProductHandler,
+    //   deleteProductsByIdHandler,
+    //   updateProductsByIdHandler,
+    //   getProductsByIdHandler,
+    // } = require("./controller/productController");
+    
 const express = require("express");
-// const {
-//   checkInput,
-//   createUserHandler,
-//   getUserHandler,
-//   getUserByIdHandlder,
-//   updateUserByIdHandler,
-//   deleteUserByIdHandler
-// } = require("./controller/userController");
 const app = express();
-const mongoose = require("mongoose");
-// const {
-//   getAllProductsHandler,
-//   createProductHandler,
-//   deleteProductsByIdHandler,
-//   updateProductsByIdHandler,
-//   getProductsByIdHandler,
-// } = require("./controller/productController");
-const userRouter = require("./router/userRouter");
-const cookieParser = require("cookie-parser");
-const productRouter = require("./router/productRouter");
-const authRouter = require("./router/authRouter");
-const { protectedRoute } = require("./controller/authController");
-require("dotenv").config();
-const PORT = process.env.PORT;
-const DB_URL = process.env.CONNECTION_STRING;
-const cors = require('cors');
-const bookingRouter = require("./router/bookingRouter");
-const { createReview } = require("./router/reviewRouter");
-const reviewRouter = require("./router/reviewRouter");
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors())
 
-//connectionString for mongodb
+require("dotenv").config();
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const { protectedRoute } = require("./controller/authController");
+const cors = require('cors');
+
+
+const DB_URL = process.env.CONNECTION_STRING;
+const PORT = process.env.PORT;
+
+const userRouter = require("./router/userRouter");
 mongoose
   .connect(DB_URL)
   .then((connection) => {
@@ -42,6 +37,17 @@ mongoose
     console.log("unable to connect", err);
   });
 
+const authRouter = require("./router/authRouter");
+const productRouter = require("./router/productRouter");
+const bookingRouter = require("./router/bookingRouter");
+const reviewRouter = require("./router/reviewRouter");
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors())
+
+//connectionString for mongodb
+
 //Routes
 //user Routes
 // app.post("/createUser", checkInput, createUserHandler);
@@ -49,17 +55,16 @@ mongoose
 // app.get("/getuserdetails/:id", getUserByIdHandlder);
 // app.patch("/updateUser/:id",updateUserByIdHandler);
 // app.delete("/deleteuser/:id",deleteUserByIdHandler);
-
-app.use("/api/auth", authRouter);
-
-app.use("/api/users", protectedRoute, userRouter);
-
 // //product Routes
 // app.get("/products", getAllProductsHandler);
 // app.get("/products/:id", getProductsByIdHandler);
 // app.post("/addproduct", createProductHandler);
 // app.delete("/products/:id", deleteProductsByIdHandler);
 // app.patch("/products/:id", updateProductsByIdHandler);
+
+app.use("/api/auth", authRouter);
+
+app.use("/api/users", protectedRoute, userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/bookings",bookingRouter);
 app.use("/api/reviews",reviewRouter);

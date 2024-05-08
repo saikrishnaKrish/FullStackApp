@@ -1,0 +1,21 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background: antiquewhite;
+    color: black;
+    padding: 20px;
+    font-size: large;
+}
+
+.cart_container{
+    position: relative;
+}
+
+.cart_quantity {
+    position: absolute;
+    bottom: 0px;
+    right: -10px;
+    color:#9cc5d1;
+    font-size: 0.9rem;
+}

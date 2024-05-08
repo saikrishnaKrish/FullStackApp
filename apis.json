@@ -1,0 +1,140 @@
+POST:
+
+http://localhost:3000/api/bookings/66239f5f8b138f3ad3cecf9c
+
+
+params:
+
+{
+    "priceAtBooking":2000
+    }
+
+Signup:
+POST
+http://localhost:3000/api/auth/signup
+
+sample
+{
+    "name":"sai",
+    "phone":7412589632,
+   "email": "saikrishna1234@gmail.com",
+    "password": "7075136456"
+}
+
+
+Login:
+POST
+http://localhost:3000/api/auth/login
+
+sample:
+{
+    "email": "saikrishna@gmail.com",
+     "password": "7075136456"
+ }
+
+output:
+-------
+ {
+    "status": "success",
+    "user": {
+        "name": "sai",
+        "email": "saikrishna1234@gmail.com",
+        "role": "user",
+        "_id": "6639979245515eb955289d41"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+api/bookings/66239f5f8b138f3ad3cecf9c
+
+
+
+
+
+
+{
+    "message": "success",
+    "data": [
+        {
+            "bookings": [],
+            "_id": "66237918ea1a75556c19341c",
+            "name": "test235456",
+            "email": "test123456789@gmail.com",
+            "phone": 6566366965,
+            "password": "5555487852",
+            "__v": 0,
+            "role": "user",
+            "otpExpiry": "2024-05-03T18:43:52.914Z",
+            "token": "284204"
+        },
+        {
+            "role": "user",
+            "bookings": [],
+            "_id": "662379a11be4f8f77404a161",
+            "name": "test235456",
+            "email": "test12347@gmail.com",
+            "phone": 6566366961,
+            "password": "123456789",
+            "__v": 0
+        },
+        {
+            "role": "user",
+            "bookings": [],
+            "_id": "662379e3e9c5ac03852ba830",
+            "name": "test235456",
+            "email": "test123471@gmail.com",
+            "phone": 6566366521,
+            "password": "123456789",
+            "__v": 0
+        },
+        {
+            "bookings": [],
+            "_id": "66237c87fb1fcd8ac3368d1f",
+            "name": "test235456",
+            "email": "test1234715@gmail.com",
+            "phone": 6566366551,
+            "password": "1234567895",
+            "__v": 0,
+            "role": "user"
+        },
+        {
+            "role": "user",
+            "bookings": [],
+            "_id": "66238bc42f253090bdf92f05",
+            "name": "test235456",
+            "email": "test12347152@gmail.com",
+            "phone": 6566366558,
+            "password": "123456789",
+            "__v": 0
+        },
+        {
+            "bookings": [],
+            "_id": "6631cb3d925a268055727ac4",
+            "name": "test2",
+            "email": "test1234@gmail.com",
+            "phone": 5203698741,
+            "password": "1289",
+            "role": "user",
+            "__v": 9,
+            "otpExpiry": "2024-05-03T11:34:33.888Z"
+        },
+        {
+            "bookings": [],
+            "_id": "663666ddf0e4f3e6e33f0473",
+            "name": "sai krishna",
+            "email": "saikrishna@gmail.com",
+            "phone": 6302806506,
+            "password": "7075136456",
+            "role": "admin",
+            "__v": 0
+        }
+    ]
+}

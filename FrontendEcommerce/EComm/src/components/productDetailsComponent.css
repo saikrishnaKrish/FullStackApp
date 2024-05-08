@@ -1,0 +1,25 @@
+.product_card {
+    display: flex;
+    align-items: center;
+    margin: 20px 8px;
+  }
+  
+  .product_image {
+    flex: 1;
+  }
+  
+  .product_image img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .product_details {
+    flex: 3;
+    padding-left: 20px; /* Adjust padding as needed */
+  }
+  
+  .product_details p {
+    max-width: 500px;
+    margin-bottom: 10px; /* Adjust spacing between paragraphs */
+  }
+  
