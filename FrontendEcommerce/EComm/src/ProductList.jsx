@@ -15,7 +15,7 @@ const Product = ({ product, handleAddProduct, handleDeleteProduct, cartQuantity 
         </div>
       </Link>
       <div className="add_To_cart_container">
-        {JSON.stringify(product)}
+
         <AddBox onClick={() => handleAddProduct(product)} />
         <div className="currentCartCount">{cartQuantity}</div>
         <IndeterminateCheckBox onClick={() => handleDeleteProduct(product)} />

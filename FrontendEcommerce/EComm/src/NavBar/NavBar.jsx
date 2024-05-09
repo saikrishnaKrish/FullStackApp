@@ -29,7 +29,8 @@ const quantity = useSelector((store)=>store.cartReducer.cartQuantity )
     <div className='navbar'>
         <NavLink style={activeState} to={"/"} >Home </NavLink>  
         {/* <NavLink style={activeState} to="/hooks">HooksExample</NavLink>   */}
-        <NavLink style={activeState} to={"/user"} >Users</NavLink>    
+        <NavLink style={activeState} to={"/user"} >Users</NavLink> 
+        <NavLink style={activeState} to={"/profile"} >Profile </NavLink> 
         <NavLink style={activeState} to={"/cart"} >
         <div className='cart_container'>
             <ShoppingCartIcon></ShoppingCartIcon>

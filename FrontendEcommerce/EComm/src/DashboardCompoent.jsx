@@ -4,7 +4,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Provider } from "react-redux";
 import store from "./Store/Store";
 import PaginationProvider from './contexts/usePaginationContext';
-import NavBar from './NavBar/NavBar'
 
 export const DashboardCompoent = () => {
 
@@ -19,14 +18,13 @@ export const DashboardCompoent = () => {
           );
         }
 
-
   return (
     <div>
     <ErrorBoundary fallbackRender={fallbackRender}>
     {/* <BrowserRouter> */}
   
     <PaginationProvider>
-      <NavBar/>
+     
            <HomeComponent/>
            </PaginationProvider>
 

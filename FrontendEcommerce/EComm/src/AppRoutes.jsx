@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import store from './Store/Store';
 import SignOnPortal from './pages/SignOnPortal';
 import ProfilePage from './pages/ProfilePage';
+import AuthProvider from './contexts/AuthContext';
 
 
 const AppRoutes = () => {
@@ -29,10 +30,12 @@ const AppRoutes = () => {
 
   return (
     <Router>
+      <AuthProvider>
           <Provider store={store}>
         <Routes>
+          
             <Route path='/' exact element={
-                    <ThemeProvider>
+              <ThemeProvider>
                         <DashboardCompoent/>
                     </ThemeProvider>
             } />
@@ -50,6 +53,7 @@ const AppRoutes = () => {
                     <Route path="*" element={<PageNotFound></PageNotFound>}/>
         </Routes>
         </Provider>
+            </AuthProvider>
     </Router>
   )
 }

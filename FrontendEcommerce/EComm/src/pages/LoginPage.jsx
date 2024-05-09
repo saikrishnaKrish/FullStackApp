@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import url from "../urlConfig";
+import {useAuthContext} from '../contexts/AuthContext'
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LoginPage = ({ handleTabChange }) => {
   const [loginInfo, setLoginInfo] = useState({
@@ -12,18 +14,33 @@ const LoginPage = ({ handleTabChange }) => {
     const { name, value } = e.target;
     setLoginInfo((info) => ({ ...info, [name]: value }));
   };
+  const {userDetails,setUserDetails} = useAuthContext();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const data = await fetch("http://localhost:3000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginInfo),
-      credentials: 'include'
-    });
-
-    console.log(data);
+    try{
+      
+      const data = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginInfo),
+        credentials: 'include'
+      });
+      const user = await data.json();
+      
+      if(user.status=="success"){
+      setUserDetails(user.user)
+      navigate("/")
+      }
+      else{
+       throw new Error(user.message)
+      }  
+      console.log(user);
+    }catch(err){
+      console.log(err);
+    }
   };
 
   return (
