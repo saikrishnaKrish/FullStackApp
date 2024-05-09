@@ -1,0 +1,42 @@
+fieldset{
+    border: none;
+}
+
+.login-contaier{
+    border-radius: 5px;
+    border: 2px solid rgb(36, 145, 116);
+    padding:20px;
+    text-align: left;
+    .login-label{
+        text-align: center;
+    }
+.login-form{
+    label{
+        display: block;
+        font-size: larger;
+    }
+    input{
+        width: 100%;
+    border-radius: 10px;
+    padding: 6px;
+    }
+}
+.login-btn {
+    width: 100%;
+    color: wheat;
+    margin: 12px 0px;
+    background-color: rgb(36, 145, 116);
+}
+.signUp-btn{
+    color: wheat;
+    background: rgb(36, 145, 116);
+    padding: 8px 50px;
+    margin-left: 10px;
+}
+}
+.SignOn-Container {
+    width: 30%;
+    margin: auto;
+    height: 100vh;
+    margin-top: calc(40vh - 150px);
+}

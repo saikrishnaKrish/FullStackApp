@@ -21,32 +21,46 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const { protectedRoute } = require("./controller/authController");
+const loggerMiddleware = require("./utils/logger");
 const cors = require('cors');
 
 
 const DB_URL = process.env.CONNECTION_STRING;
 const PORT = process.env.PORT;
 
-const userRouter = require("./router/userRouter");
+
+//connectionString for mongodb
 mongoose
-  .connect(DB_URL)
-  .then((connection) => {
-    console.log("connected to DB");
-  })
-  .catch((err) => {
-    console.log("unable to connect", err);
-  });
+.connect(DB_URL)
+.then((connection) => {
+  console.log("connected to DB");
+})
+.catch((err) => {
+  console.log("unable to connect", err);
+});
+
+app.use(loggerMiddleware)
 
 const authRouter = require("./router/authRouter");
+const userRouter = require("./router/userRouter");
 const productRouter = require("./router/productRouter");
 const bookingRouter = require("./router/bookingRouter");
 const reviewRouter = require("./router/reviewRouter");
 
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors())
+app.use(cors(corsConfig))
 
-//connectionString for mongodb
+
+// this is allowing all the requests
+app.use(cors(corsConfig)); 
+app.options('*', cors(corsConfig));
+
 
 //Routes
 //user Routes
