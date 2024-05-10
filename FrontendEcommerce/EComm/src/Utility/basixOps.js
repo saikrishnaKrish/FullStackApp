@@ -2,7 +2,7 @@ function basicOps(products,searchTerm,sortDir,currCategory,pageNum,pageSize){
 
 
 
-    console.log("currCategory",currCategory)
+    // console.log("currCategory",currCategory)
     if(products == null){
         return;
     }
@@ -35,12 +35,12 @@ function basicOps(products,searchTerm,sortDir,currCategory,pageNum,pageSize){
 
     /********************categorization*************************/ 
     let filteredSortedGroupByArr = filteredSortedArr;
-    console.log("first",filteredSortedGroupByArr,"currCategory",currCategory)
+    // console.log("first",filteredSortedGroupByArr,"currCategory",currCategory)
 
     if(currCategory!="All categories"){
         filteredSortedGroupByArr = filteredSortedGroupByArr.filter((product)=> {
             
-        console.log("first",filteredSortedGroupByArr,"currCategory",currCategory,"product?.category",product?.category)
+        // console.log("first",filteredSortedGroupByArr,"currCategory",currCategory,"product?.category",product?.category)
             return product?.category.toLowerCase()==currCategory.toLowerCase();
         })
     }
@@ -66,7 +66,7 @@ function basicOps(products,searchTerm,sortDir,currCategory,pageNum,pageSize){
     let sidx = (pageNum - 1) * pageSize;
     let eidx = sidx + pageSize;
     filteredSortedGroupByArr = filteredSortedGroupByArr.slice(sidx, eidx);
-    console.log(filteredSortedArr)
+    // console.log(filteredSortedArr)
     
     return { filteredSortedGroupByArr, totalPages };
 

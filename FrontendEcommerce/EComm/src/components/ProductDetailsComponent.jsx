@@ -1,12 +1,7 @@
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom';
 import useFetchData from '../Utility/useFetchData';
 import './productDetailsComponent.css';
-import URL from '../urlConfig'
-
-// fetch('https://fakestoreapi.com/products/1')
-//             .then(res=>res.json())
-//             .then(json=>console.log(json))
+import URL from '../urlConfig';
 
 
 const ProductDetailsComponent = () => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ProductList from "./ProductList";
+import ProductList from "./components/ProductList";
 import Categories from "./Categories";
 import useFetchData from "./Utility/useFetchData";
 import basicOps from "./Utility/basixOps";

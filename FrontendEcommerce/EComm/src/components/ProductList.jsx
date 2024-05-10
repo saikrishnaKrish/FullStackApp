@@ -1,6 +1,6 @@
 import { AddBox, IndeterminateCheckBox } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { addToCart, deleteFromCart } from "./Store/CartSlice";
+import { addToCart, deleteFromCart } from "../Store/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Product = ({ product, handleAddProduct, handleDeleteProduct, cartQuantity }) => {

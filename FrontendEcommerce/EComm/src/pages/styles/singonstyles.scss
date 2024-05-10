@@ -1,0 +1,67 @@
+fieldset {
+    border: none;
+}
+
+.MuiTabs-flexContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.main-container {
+    border-radius: 5px;
+    border: 2px solid rgb(36, 145, 116);
+    padding: 20px;
+    text-align: left;
+    .login-label ,.signup-label
+    {
+        text-align: center;
+    }
+    .login-form ,.signup-form{
+        label {
+            display: block;
+            font-size: larger;
+        }
+        input {
+            width: 100%;
+            border-radius: 10px;
+            padding: 6px;
+        }
+    }
+    .login-btn,.signin-btn {
+        width: 100%;
+        color: wheat;
+        margin: 12px 0px;
+        background-color: rgb(36, 145, 116);
+       &:hover{
+        color: black;
+       }
+        &:disabled {
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed; 
+        }
+    
+    }
+    .signUp-btn,.Login-btn {
+        color: wheat;
+        background: rgb(36, 145, 116);
+        padding: 8px 50px;
+        margin-left: 10px;
+    }
+}
+.SignOn-Container {
+    width: 30%;
+    margin: auto;
+    margin-top: calc(35vh - 150px);
+    .required-field{
+        color: red;
+    }
+    .MuiTabPanel-root{
+        border: 18px solid #efece1;
+        border-radius: 11px;
+    
+    }
+}
+
+

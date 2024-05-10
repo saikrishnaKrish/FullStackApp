@@ -6,7 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import LoginPage from './LoginPage';
 import SignInPage from './SignInPage';
-import './styles.scss'
+import './styles/singonstyles.scss'
 
 
 const SignOnPortal = () => {
@@ -27,15 +27,15 @@ const SignOnPortal = () => {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleTabChange} aria-label="lab API tabs example">
-            <Tab label="Sign Ip" value="1" />
-            <Tab label="Sign UP" value="2" />
+            <Tab label="SignIN" value="1" />
+            <Tab label="SignUP" value="2" />
           </TabList>
         </Box>
         <TabPanel value="1">
           <LoginPage handleTabChange={handleTabChange}/>
         </TabPanel>
         <TabPanel value="2">
-            <SignInPage/>
+            <SignInPage handleTabChange={handleTabChange}/>
         </TabPanel>
       </TabContext>
     </Box>

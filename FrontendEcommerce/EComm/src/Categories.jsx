@@ -1,6 +1,6 @@
 
 function Categories({ categories, setCurrCategory,currCategory }) {
-  console.log("categories",categories,"setCurrCategory",currCategory)
+  // console.log("categories",categories,"setCurrCategory",currCategory)
   return (
     <>
       <button

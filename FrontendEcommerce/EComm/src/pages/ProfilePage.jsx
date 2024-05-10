@@ -1,10 +1,23 @@
 import { useAuthContext } from '../contexts/AuthContext'
 import './ProfilePage.css'; 
 import userImage from '../assets/userImage.png'
+import { useNavigate } from 'react-router-dom';
+import {useEffect} from 'react';
 
 const ProfilePage = () => {
-  const {userDetails } = useAuthContext();
-  const { email, name, role } = userDetails;
+  const {userDetails,handleLogout } = useAuthContext();
+
+  const navigate = useNavigate();  
+  useEffect(()=>{
+  
+  if(userDetails == null){
+       navigate("/signonportal")
+    }
+  },[userDetails])
+
+    const { email, name, role } = userDetails||{};
+
+
 
   return (
     <div className="user-details-container">
@@ -25,6 +38,7 @@ const ProfilePage = () => {
           <span className="value">{role}</span>
         </div>
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

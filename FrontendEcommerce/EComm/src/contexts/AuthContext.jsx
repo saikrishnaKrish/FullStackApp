@@ -5,10 +5,15 @@ const AuthContext = createContext();
 
 
 const AuthProvider = ({children})=>{
-    const [userDetails,setUserDetails ] =useState(null);
+    const [userDetails,setUserDetails ] =useState({});
 
+    const handleLogout = ()=>{
+        let allCookies = document.cookie;
+        console.log(allCookies)
+        setUserDetails({})
+    }
 
-    return <AuthContext.Provider  value={{userDetails,setUserDetails}}>
+    return <AuthContext.Provider  value={{userDetails,setUserDetails,handleLogout}}>
             {children}
     </AuthContext.Provider>
 }

@@ -10,9 +10,14 @@ import store from './Store/Store';
 import SignOnPortal from './pages/SignOnPortal';
 import ProfilePage from './pages/ProfilePage';
 import AuthProvider from './contexts/AuthContext';
+import NavBar from './NavBar/NavBar.jsx';
+import Logout from "./pages/LogoutPage";
+import RequireAuth from './components/RequireAuth.jsx';
+
 
 
 const AppRoutes = () => {
+  
     function About() {
         return <h2>About Page</h2>;
       }
@@ -32,13 +37,15 @@ const AppRoutes = () => {
     <Router>
       <AuthProvider>
           <Provider store={store}>
+            <NavBar/>
         <Routes>
-          
+        <Route element={<RequireAuth></RequireAuth>}>
             <Route path='/' exact element={
               <ThemeProvider>
                         <DashboardCompoent/>
                     </ThemeProvider>
             } />
+            </Route>
             <Route path='signonportal' element={<SignOnPortal/>}/>
                     <Route path="about" element={<About />} />
                     <Route path="Listing" element={<Listing />} />
@@ -46,6 +53,7 @@ const AppRoutes = () => {
                     <Route path="profile" element={<ProfilePage />} />
                     {/* <Route path="/hooks" element={<HooksExample/>}/> */}
                     <Route path="product/:id" element={<ProductDetailsComponent />} />
+                    <Route path="logout" element={<Logout/>} />
                     {/* <Route path = "/product/:id" element = {<ProductDetails></ProductDetails>}> </Route> */}
                     {/* <ReduxWithThunkExample/> */}
                     {/* <ToolkitExample/> */}

@@ -8,18 +8,28 @@ const LoginPage = ({ handleTabChange }) => {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
+    enableBtn:true,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginInfo((info) => ({ ...info, [name]: value }));
+    
+    if(loginInfo.email.trim()!="" && loginInfo.password.trim()!=""){
+      setLoginInfo((info)=>({...info,enableBtn:false}))
+    }
   };
   const {userDetails,setUserDetails} = useAuthContext();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+
+
+
+
+
+
     try{
-      
       const data = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: {
@@ -44,20 +54,22 @@ const LoginPage = ({ handleTabChange }) => {
   };
 
   return (
-    <div className="login-contaier">
+    <div className="main-container">
       <h4 className="login-label">Enter your cridentials</h4>
       <form className="login-form">
         <fieldset>
-          <label>Email</label>
-          <input type="email" name="email" onChange={handleInputChange} />
+          <label>Email<span className="required-field">*</span></label>
+          <input type="email" name="email" required onChange={handleInputChange} />
         </fieldset>
         <fieldset>
-          <label>password</label>
-          <input type="password" name="password" onChange={handleInputChange} />
+          <label>password<span className="required-field">*</span></label>
+          <input type="password" name="password" required onChange={handleInputChange} />
         </fieldset>
       </form>
 
-      <button className="login-btn" onClick={handleLogin}>
+      <button className="login-btn" onClick={handleLogin}
+        disabled={loginInfo.enableBtn}
+      >
         {" "}
         Login{" "}
       </button>
