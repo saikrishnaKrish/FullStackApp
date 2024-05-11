@@ -71,6 +71,8 @@
 
   .product {
     border: 1px solid gray;
+    border-radius: 30px;
+margin: 5px;
     padding: 1rem;
     text-align: center;
     height: 30rem;

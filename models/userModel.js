@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt= require('bcrypt');
 /**
  *  require vs import
  *  import is ES6 module
@@ -68,10 +69,14 @@ const validRoles=["admin","user","sales"]
 
 userSchema.pre("save",async function(next){
 
-  // if(this.password!=this.confirmPassword){
-  //  return next(new Error("Password and confirm Password should be same"));
-  // } 
+  if(this.password!=this.confirmPassword){
+   return next(new Error("Password and confirm Password should be same"));
+  } 
   this.confirmPassword=undefined;
+  
+  const hashPassword = await bcrypt.hash(this.password,12);
+  console.log(hashPassword);
+  this.password=hashPassword;
 
   if(this.role){
     const isValid = validRoles.includes(this.role);
