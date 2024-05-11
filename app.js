@@ -92,6 +92,6 @@ app.use("/api/users", protectedRoute, userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/bookings",bookingRouter);
 app.use("/api/reviews",reviewRouter);
-app.get("/", (req, res) => res.status(200).send("Hi Dude!!!"));
+app.get("/", (req, res) => res.status(200).send("Hi Dude!!! let's rock it"));
 
 app.listen(PORT, () => console.log("server is running", PORT));
