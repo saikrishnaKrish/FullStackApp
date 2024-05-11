@@ -3,6 +3,7 @@ import axios from "axios";
 import url from "../urlConfig";
 import {useAuthContext} from '../contexts/AuthContext'
 import { Navigate, useNavigate } from "react-router-dom";
+import urlConfig from "../urlConfig";
 
 const LoginPage = ({ handleTabChange }) => {
   const [loginInfo, setLoginInfo] = useState({
@@ -30,7 +31,7 @@ const LoginPage = ({ handleTabChange }) => {
 
 
     try{
-      const data = await fetch("http://localhost:3000/api/auth/login", {
+      const data = await fetch(urlConfig.LOGIN_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
