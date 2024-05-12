@@ -81,7 +81,7 @@ userSchema.pre("save",async function(next){
   if(this.role){
     const isValid = validRoles.includes(this.role);
         if(!isValid){
-        return next(new Error(`Invalid role,${this.role}`));
+        return next(new Error(`InvaDlid role,${this.role}`));
         }
   }else{
     this.role="user"
