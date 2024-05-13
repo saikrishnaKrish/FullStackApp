@@ -4,7 +4,7 @@ const { emailBuilder } = require("../nodemailer");
 const userModel = require("../models/userModel");
 
 const { SECRET } = process.env;
-
+const bcrypt = require('bcrypt');
 /** authentication related handlers */
 
 const otpGenerator = () => {
@@ -32,12 +32,13 @@ const signUpHandler = async (req, res) => {
 const loginHandler = async (req, res) => {
   try {
     let { email, password } = req.body;
-    let user = await UserModel.findOne({ email });
-    console.log(user);
+    console.log("hello")
+    let user = await UserModel.findOne({email: email });
+    console.log(user)    
     if (user) {
-      let areEqual = user.password == password;
-      console.log(areEqual);
-      if (areEqual) {
+      const checkEqual = await bcrypt.compare(password,user.password)
+
+      if (checkEqual) {
         //user is authenticated
         //sending the token
         //adding id of the user as payload
@@ -46,12 +47,11 @@ const loginHandler = async (req, res) => {
           expiresIn: "1h",
         });
 
-        console.log("token created", token);
         res.cookie("token", token, {
           maxAge: 1000 * 60 * 60 * 24 * 7,
           httpOnly: true,
         });
-        console.log("data");
+
 
         return res.status(200).json({
           status: "success",
@@ -59,10 +59,12 @@ const loginHandler = async (req, res) => {
           user: {
             name: user.name,
             email: user.email,
+            authToken:token,
             role: user.role,
             _id: user._id,
           },
         });
+
       } else {
         console.log("err", err);
         res.status(404).json({
@@ -241,8 +243,8 @@ const isAuthorized = (allowedRoles) => {
 };
 
 const logoutHandler = async (req, res) => {
-  res.clearCookie("token");
-  res.status("200").json({
+  res.cookie("token",{})
+ return res.status("200").json({
     status: "success",
     message: "logged out successfully",
   });

@@ -68,7 +68,6 @@ const userSchema = new mongoose.Schema({
 const validRoles=["admin","user","sales"]
 
 userSchema.pre("save",async function(next){
-
   if(this.password!=this.confirmPassword){
    return next(new Error("Password and confirm Password should be same"));
   } 
