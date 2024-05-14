@@ -243,7 +243,7 @@ const isAuthorized = (allowedRoles) => {
 };
 
 const logoutHandler = async (req, res) => {
-  res.cookie("token",{})
+  res.clearCookie('token');
  return res.status("200").json({
     status: "success",
     message: "logged out successfully",
