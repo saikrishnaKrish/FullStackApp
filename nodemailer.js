@@ -99,14 +99,15 @@ const HTML_TEMPLATE = (text) => {
   //   console.log("message id:",info.messageId)
   // })
 
-  async function emailBuilder(to, subject, text) {
+  async function emailBuilder(to, subject, text,template) {
     try{
         const options = {
             from:'saikrishna.kanteti@gmail.com',
             to:to,
             subject:subject,
             text:text,
-            html:HTML_TEMPLATE(text)
+            // html:HTML_TEMPLATE(text)
+            html:template
         }
         sendEmail(options, (info)=>{
             console.log("email sent successfully")

@@ -14,27 +14,43 @@ const otpGenerator = () => {
 const signUpHandler = async (req, res) => {
   try {
     const userDetails = req.body;
-
+    console.log("user details",userDetails);
     // Validate user input
+    let checkUserExists = await userModel.findOne({email:userDetails.email});
+    
+    console.log("user checkUserExists",checkUserExists);
+    if(checkUserExists && Object.keys(checkUserExists).length > 0){
+      return res.status(200).json({
+        status:"success",
+        message:"user already registered with us!"
+      })
+    }
+    
     const validCheck = isValidUser(userDetails);
+    console.log("user checks",validCheck);
 
     if (validCheck != true) {
       return res.status(400).json({
-        message: validCheck,
         status: "failure",
+        message: validCheck,
       });
     }
 
     let newUser = await userModel.create(userDetails);
+
+    // to, subject, text,template)
+    const msg="Thanks for sigining with us use:FREEUSE for getting 10% discount"
+    emailBuilder(newUser.email,`Welcome ${newUser.name}`,msg,msg)
+    
     res.status(201).json({
-      message: "User created successfully!",
+      message: "Thanks for registering with us!!!",
       user: newUser,
       status: "success",
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Internal server error",err,
+      message: "Internal server error",
       status: "failure",
     });
   }

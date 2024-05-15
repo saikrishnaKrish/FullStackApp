@@ -1,4 +1,4 @@
-const welcome=(req,res)=>{
+const welcomeUserTemplate=(username,text)=>{
     return `  <!DOCTYPE html>
     <html>
       <head>
@@ -38,13 +38,13 @@ const welcome=(req,res)=>{
         <div class="container">
           <div class="email">
             <div class="email-header">
-              <h1>OTP for Reset</h1>
+              <h1>Welcome ${username}</h1>
             </div>
             <div class="email-body">
               <p>${text}</p>
             </div>
             <div class="email-footer">
-              <p>EMAIL FOOTER</p>
+              <p>Please feel free to reach out to us email:saikrishnakanteti@gmail.com</p>
             </div>
           </div>
         </div>
@@ -52,3 +52,5 @@ const welcome=(req,res)=>{
     </html>
   `
 }
+
+export default welcomeUserTemplate;
