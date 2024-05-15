@@ -65,10 +65,9 @@ const loginHandler = async (req, res) => {
         });
 
       } else {
-        console.log("err", err);
         res.status(404).json({
           status: "failure",
-          message: "email or password is incorrect!!!",
+          message: "email or password is incorrect !!!",
         });
       }
     } else {
@@ -78,9 +77,9 @@ const loginHandler = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(404).json({
+    res.status(500).json({
       status: "failure",
-      message: "email or password is incorrect",
+      message: err.message
     });
   }
 };
