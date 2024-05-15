@@ -16,9 +16,11 @@ const signUpHandler = async (req, res) => {
     const userDetails = req.body;
 
     // Validate user input
-    if (!isValidUser(userDetails)) {
+    const validCheck = isValidUser(userDetails);
+
+    if (validCheck != true) {
       return res.status(400).json({
-        message: "Invalid user data provided",
+        message: validCheck,
         status: "failure",
       });
     }
@@ -32,7 +34,7 @@ const signUpHandler = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Internal server error",err,
       status: "failure",
     });
   }
@@ -40,16 +42,30 @@ const signUpHandler = async (req, res) => {
 
 // Function to validate user input
 const isValidUser = (userDetails) => {
-  // Check if phone is a number and password & confirmPassword are at least 8 characters long
-  if (
-    isNaN(userDetails.phone) || // Check if phone is not a number
-    userDetails.password.length < 8 ||
-    userDetails.confirmPassword.length < 8
-  ) {
-    return false;
+  // Regular expression to validate phone number (10 digits)
+  const phoneRegex = /^\d{10}$/;
+  let checkMsg=""
+  // Check if phone is a valid number
+  if (!phoneRegex.test(userDetails.phone)) {
+    checkMsg +="Phone number must be a 10-digit number";
   }
-  return true;
+
+  // Check if password and confirm password have at least 8 characters
+  if (userDetails.password.length < 8 || userDetails.confirmPassword.length < 8) {
+    checkMsg +=","+"Password and confirm password should have a minimum length of 8 characters";
+  }
+
+  // Check if password and confirm password match
+  if (userDetails.password !== userDetails.confirmPassword) {
+    checkMsg+","+"Password and confirm password do not match";
+  }
+  if (checkMsg) {
+    return checkMsg.trim(); // Remove trailing space and return error messages
+  }
+
+  return true; // Return true if all validations pass
 };
+
 
 
 const loginHandler = async (req, res) => {
