@@ -14,20 +14,43 @@ const otpGenerator = () => {
 const signUpHandler = async (req, res) => {
   try {
     const userDetails = req.body;
+
+    // Validate user input
+    if (!isValidUser(userDetails)) {
+      return res.status(400).json({
+        message: "Invalid user data provided",
+        status: "failure",
+      });
+    }
+
     let newUser = await userModel.create(userDetails);
     res.status(201).json({
-      message: "user created successfully!",
+      message: "User created successfully!",
       user: newUser,
       status: "success",
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: err.message,
+      message: "Internal server error",
       status: "failure",
     });
   }
 };
+
+// Function to validate user input
+const isValidUser = (userDetails) => {
+  // Check if phone is a number and password & confirmPassword are at least 8 characters long
+  if (
+    isNaN(userDetails.phone) || // Check if phone is not a number
+    userDetails.password.length < 8 ||
+    userDetails.confirmPassword.length < 8
+  ) {
+    return false;
+  }
+  return true;
+};
+
 
 const loginHandler = async (req, res) => {
   try {
