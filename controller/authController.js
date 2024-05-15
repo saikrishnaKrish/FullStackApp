@@ -32,9 +32,8 @@ const signUpHandler = async (req, res) => {
 const loginHandler = async (req, res) => {
   try {
     let { email, password } = req.body;
-    console.log("hello")
     let user = await UserModel.findOne({email: email });
-    console.log(user)    
+
     if (user) {
       const checkEqual = await bcrypt.compare(password,user.password)
 
@@ -69,7 +68,7 @@ const loginHandler = async (req, res) => {
         console.log("err", err);
         res.status(404).json({
           status: "failure",
-          message: "email or password is incorrect",
+          message: "email or password is incorrect!!!",
         });
       }
     } else {
